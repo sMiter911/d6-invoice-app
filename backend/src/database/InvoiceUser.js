@@ -1,7 +1,7 @@
-const InvoiceUser = require("../database/InvoiceUser");
+const DB = require("../database/db");
 
 const getAllInvoiceUsers = () => {
-  return InvoiceUser.getAllInvoiceUsers();
+  return;
 };
 
 const getOneInvoiceUser = () => {
