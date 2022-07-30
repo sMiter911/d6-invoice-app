@@ -1,0 +1,53 @@
+<section>
+  <header class="major">
+    <h1>{{ invoiceUser.first_name }} {{ invoiceUser.last_name }}</h1>
+    <p>{{ invoiceUser.company_name }}</p>
+    <p>{{ invoiceUser.email }}</p>
+  </header>
+  <div class="container">
+    <div class="table-wrapper" *ngIf="invoiceOrders.length > 0">
+      <table class="fl-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Invoice Number</th>
+            <th>Order Date</th>
+            <th>Due Date</th>
+            <th>Total</th>
+            <th>Open Invoice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of invoiceOrders">
+            <td>{{ order.id }}</td>
+            <td>{{ order.invoice_number }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.due_date }}</td>
+            <td>{{ order.total }}</td>
+            <td>
+              <button
+                class="btn btn-primary"
+                (click)="generateInvoice(order.id)"
+              >
+                Select
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div *ngIf="invoiceOrders.length == 0">
+      <h2 class="no-data">No Orders Found</h2>
+    </div>
+    <ul class="actions special">
+      <li>
+        <a [routerLink]="['/invoice-users']" class="button primary">Back</a>
+      </li>
+      <li>
+        <a (click)="addInvoice(invoiceUser.id)" class="button primary"
+          >Add Invoice</a
+        >
+      </li>
+    </ul>
+  </div>
+</section>

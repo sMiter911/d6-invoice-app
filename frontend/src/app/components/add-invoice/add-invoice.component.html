@@ -1,0 +1,178 @@
+<div class="container">
+  <form [formGroup]="invoiceForm">
+    <header>
+      <address contenteditable>
+        <p>ACME Industries</p>
+        <p>24 Wallaby<br />Way, Sydney</p>
+        <p>(555) 555-1234</p>
+      </address>
+      <table>
+        <h1>Invoice</h1>
+        <tr>
+          <th>Date</th>
+          <td><input type="date" name="date" formControlName="date" /></td>
+        </tr>
+        <tr>
+          <th>Invoice#</th>
+          <td>
+            <input
+              type="text"
+              name="invoice_number"
+              formControlName="invoice_number"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>Customer ID</th>
+          <td>{{ invoiceUser.id }}</td>
+        </tr>
+        <tr>
+          <th>Due Date</th>
+          <td>
+            <input type="date" name="due_date" formControlName="due_date" />
+          </td>
+        </tr>
+      </table>
+    </header>
+    <br />
+    <hr />
+    <br />
+    <article>
+      <h1 class="bill-to">Bill to</h1>
+      <address>
+        <p>{{ invoiceUser.first_name }} {{ invoiceUser.last_name }}</p>
+        <p>{{ invoiceUser.company_name }}</p>
+        <p>{{ invoiceUser.address }}</p>
+        <p>{{ invoiceUser.email }}</p>
+        <p>{{ invoiceUser.phone_number }}</p>
+      </address>
+    </article>
+    <br />
+    <table formArrayName="orders" class="invoice-table">
+      <thead>
+        <tr>
+          <th>Item Code</th>
+          <th>Item Name</th>
+          <th>Unit Cost</th>
+          <th>Quantity</th>
+          <th>Taxable</th>
+        </tr>
+      </thead>
+      <tr
+        *ngFor="let order of orders().controls; let i = index"
+        [formGroupName]="i"
+      >
+        <td>
+          <button class="btn btn-minus" (click)="removeOrders(i)">-</button
+          ><input
+            type="text"
+            name="item_code"
+            formControlName="item_code"
+            class="line-item"
+          />
+        </td>
+        <td>
+          <input
+            type="text"
+            name="item_name"
+            formControlName="item_name"
+            class="line-item"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            name="order_item_price"
+            formControlName="order_item_price"
+            class="line-item"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            name="order_item_quantity"
+            formControlName="order_item_quantity"
+            class="line-item"
+          />
+        </td>
+        <td>
+          <input type="checkbox" name="tax_item" formControlName="tax_item" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <button class="btn btn-primary" (click)="addOrders()">
+            Add Item
+          </button>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <hr />
+    <br />
+    <div class="calc-table">
+      <div class="notes">
+        <h1>Additional Notes</h1>
+        <textarea name="notes" formControlName="notes"></textarea>
+      </div>
+      <table>
+        <tr>
+          <th>Sub Total</th>
+          <td>
+            <p>{{ subTotal }}</p>
+          </td>
+        </tr>
+        <tr>
+          <th>Taxable</th>
+          <td>
+            <p>{{ taxable }}</p>
+          </td>
+        </tr>
+        <tr>
+          <th>Tax Rate</th>
+          <td>
+            <input
+              type="number"
+              name="tax"
+              formControlName="tax"
+              value="14.00"
+              class="line-item"
+            />
+          </td>
+        </tr>
+        <tr>
+          <th>Tax Due</th>
+          <td>
+            <p>{{ taxDue }}</p>
+          </td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <td>
+            <p>{{ total }}</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <p>Make all checks payable to</p>
+            <p>ACME Industries</p>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br />
+    <button class="btn btn-footer" (click)="goBack()">Back</button>
+    <button
+      *ngIf="invoiceClear"
+      class="btn btn-footer"
+      (click)="clearInvoice()"
+    >
+      Clear Invoice
+    </button>
+    <button *ngIf="!submit" class="btn btn-footer" (click)="onSubmit()">
+      Calculate
+    </button>
+    <button class="btn btn-footer" (click)="generatePdf()">Generate PDF</button>
+  </form>
+  <br />
+</div>
