@@ -44,7 +44,6 @@ const createNewInvoiceUser = (req, res) => {
   const { body } = req;
   if (
     !body.email ||
-    !body.password ||
     !body.first_name ||
     !body.last_name ||
     !body.company_name ||
@@ -56,10 +55,9 @@ const createNewInvoiceUser = (req, res) => {
       .json({ status: "FAILED", error: "Missing required fields" });
   }
   DB.run(
-    `INSERT INTO invoice_users (email, password, first_name, last_name, company_name, phone_number, address) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO invoice_users (email, first_name, last_name, company_name, phone_number, address) VALUES (?, ?, ?, ?, ?, ?)`,
     [
       body.email,
-      body.password,
       body.first_name,
       body.last_name,
       body.company_name,

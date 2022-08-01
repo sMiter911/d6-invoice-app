@@ -1,0 +1,55 @@
+<div class="container">
+  <form [formGroup]="userForm">
+    <label for="fname">First Name</label>
+    <input
+      type="text"
+      id="fname"
+      name="firstname"
+      placeholder="Your name.."
+      formControlName="fname"
+    />
+
+    <label for="lname">Last Name</label>
+    <input
+      type="text"
+      id="lname"
+      name="lastname"
+      placeholder="Your last name.."
+      formControlName="lname"
+    />
+    <label for="email">Email</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      placeholder="Your last email.."
+      formControlName="email"
+    />
+    <label for="cname">Company Name</label>
+    <input
+      type="text"
+      id="cname"
+      name="cname"
+      placeholder="Your last company name.."
+      formControlName="cname"
+    />
+    <label for="contact">Contact</label>
+    <input
+      type="text"
+      id="contact"
+      name="contact"
+      placeholder="Your last contact number.."
+      formControlName="contact"
+    />
+    <label for="address">Address</label>
+    <input
+      type="text"
+      id="address"
+      name="address"
+      placeholder="Your last contact address.."
+      formControlName="address"
+    />
+
+    <input type="submit" value="Submit" (click)="addUser()" />
+  </form>
+</div>

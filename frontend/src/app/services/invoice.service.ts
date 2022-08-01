@@ -34,6 +34,12 @@ export class InvoiceService {
     return this.http.get<Orders>(`${this.API_URL}/${id}/orders`);
   }
 
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(`${this.API_URL}/`, user, {
+      headers: this.headers,
+    });
+  }
+
   addInvoice(invoice: InvoiceOrder): Observable<InvoiceOrder> {
     return this.http.post<InvoiceOrder>(`${this.API_URL}/addinvoice`, invoice, {
       headers: this.headers,

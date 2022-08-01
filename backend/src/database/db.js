@@ -13,7 +13,6 @@ let DB = new sqlite3.Database(
       `CREATE TABLE invoice_users ( 
           id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
           email VARCHAR(255) NOT NULL, 
-          password VARCHAR(255) NOT NULL, 
           first_name VARCHAR(255) NOT NULL, 
           last_name VARCHAR(255) NOT NULL, 
           company_name VARCHAR(255) NOT NULL, 
